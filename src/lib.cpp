@@ -1,6 +1,6 @@
 #include <iostream>
 
-void say_hello()
+extern "C" void say_hello()
 {
-  std::cout << "Hello World!" << std::endl;
+  std::cout << "Hello World from Plugin!" << std::endl;
 }
