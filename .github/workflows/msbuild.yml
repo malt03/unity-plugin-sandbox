@@ -1,15 +1,10 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: MSBuild
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   SOLUTION_FILE_PATH: .
@@ -22,19 +17,19 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Create Build Environment
-      run: cmake -E make_directory ${{github.workspace}}/build
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
 
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -S ${{github.workspace}}
-    
-    - name: Build
-      run: cmake --build ${{github.workspace}}/build --config Release
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build -S ${{github.workspace}}
 
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: hello-dll
-        path: ${{github.workspace}}/build/*.dll
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build --config Release
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: hello-dll
+          path: ${{github.workspace}}/build/Release/*.dll
